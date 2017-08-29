@@ -1,4 +1,4 @@
-// Native Javascript for Bootstrap 3 v2.0.13 | © dnp_theme | MIT-License
+// Native Javascript for Bootstrap 3 v2.0.14 | © dnp_theme | MIT-License
 (function (root, factory) {
   if (typeof define === 'function' && define.amd) {
     // AMD support:
@@ -925,7 +925,6 @@
   // DROPDOWN DEFINITION
   // ===================
   var Dropdown = function( element, option ) {
-      
     // initialization element
     element = queryElement(element);
   
@@ -942,7 +941,7 @@
   
       // handlers
       keyHandler = function(e) {
-        if (isOpen && (e.which == 27 || e.keyCode == 27)) { relatedTarget = null; hide(); } // e.keyCode for IE8
+        if (isOpen && (e.which == 27 || e.keyCode == 27)) { relatedTarget = null; hide(); } // e.keyCode for IE8     
       },
       clickHandler = function(e) {
         var eventTarget = e[target],
@@ -974,6 +973,10 @@
         bootstrapCustomEvent.call(parent, hiddenEvent, component, relatedTarget);
         off(document, keydownEvent, keyHandler);
         isOpen = false;
+      },
+      hitKeyOpen = function(e){
+        if (!/(38|40|27)/.test(e.keyCode)) return
+        show();
       };
   
     // public methods
@@ -986,6 +989,7 @@
     if ( !(stringDropdown in element) ) { // prevent adding event handlers twice
       menu[setAttribute]('tabindex', '0'); // Fix onblur on Chrome | Safari
       on(document, clickEvent, clickHandler);
+      on(element, keydownEvent, hitKeyOpen);
     }
     element[stringDropdown] = this;
   };
