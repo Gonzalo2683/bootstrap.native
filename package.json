@@ -9,7 +9,9 @@
     "build-v4": "node build-v4.js > dist/bootstrap-native-v4.js && npm run build-v4-min",
     "build-min": "node build.js -m > dist/bootstrap-native.min.js",
     "build-v4-min": "node build-v4.js -m > dist/bootstrap-native-v4.min.js",
-    "watch": "onchange \"lib/*\" -i -- npm run build"
+    "watch": "onchange \"lib/*\" -i -- npm run build",
+    "serve": "browser-sync start --server --files ./index.html -o",
+    "servbuild": "npm-run-all --parallel serve watch"
   },
   "repository": {
     "type": "git",
@@ -29,6 +31,8 @@
   },
   "homepage": "https://thednp.github.io/bootstrap.native/",
   "devDependencies": {
+    "browser-sync": "^2.18.13",
+    "npm-run-all": "^4.1.1",
     "onchange": "^3.0.2",
     "uglify-js": "^2.7.3",
     "yargs": "^5.0.0"
